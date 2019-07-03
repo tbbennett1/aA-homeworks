@@ -22,7 +22,7 @@ class GraphNode
     
     until queue.empty?
       current_node = queue.shift
-      
+      p visited
       unless visited.include?(current_node)
         return current_node.val if current_node.val == target_value
         visited.add(current_node)
@@ -46,6 +46,6 @@ p a.neighbors = [b, c, e]
 p c.neighbors = [b, d]
 p e.neighbors = [a]
 p f.neighbors = [e]
-p a.bfs(a, "b")
-p a.bfs(a, "f")
-p f.bfs(f, "a")
+p a.bfs(a, "e")
+# p a.bfs(a, "f")
+# p f.bfs(f, "a")
