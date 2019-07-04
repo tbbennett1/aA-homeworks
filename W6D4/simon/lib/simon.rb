@@ -1,3 +1,5 @@
+require "byebug"
+
 class Simon
   COLORS = %w(red blue green yellow)
 
@@ -15,13 +17,20 @@ class Simon
     end
 
     puts game_over_message
-    reset_game
+    puts "Wanna play again? y/n"
+    input = gets.chomp
+    if input == "y"
+      reset_game
+      play
+    else
+      puts "Thanks for playing"
+    end
   end
 
   def take_turn
     unless game_over
-      # self.show_sequence
-      # self.require_sequence
+      show_sequence
+      require_sequence
 
       if show_sequence == require_sequence
         round_success_message
@@ -33,21 +42,30 @@ class Simon
   end
 
   def show_sequence
-    sequence_length.times do
+    @sequence_length.times do
       add_random_color
     end
+    duped_seq = seq.dup
 
     until seq.empty?
-      puts seq.pop
-      sleep(1)
+      print seq.pop 
+      sleep(0.5)
+      print "\r"
+      $stdout.flush
     end
 
+    duped_seq
   end
 
   def require_sequence
-    puts "Please do as simon says: "
-    input = gets.chomp
-    
+    player_input = []
+    puts "Please do as simon says:"
+    @sequence_length.times do 
+      input = gets.chomp
+      player_input << input
+    end
+
+    player_input
   end
 
   def add_random_color
@@ -55,11 +73,11 @@ class Simon
   end
 
   def round_success_message
-    "Great job! you got it right! Ready for one more?..."
+    puts "Great job! you got it right! Ready for one more?..."
   end
 
   def game_over_message
-    "sorry, but that was not the right sequence. you lose"
+    puts "sorry, but that was not the right sequence. you lose"
   end
 
   def reset_game
@@ -69,5 +87,5 @@ class Simon
   end
 end
 
-# new_game = Simon.new
-# new_game.play
+new_game = Simon.new
+new_game.play
