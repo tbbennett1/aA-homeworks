@@ -7,6 +7,7 @@ function mysteryScoping1() {
   console.log(x);
 }
 
+
 function mysteryScoping2() {
   const x = 'out of block';
   if (true) {
