@@ -1,0 +1,10 @@
+version: "2"
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tbbennett1/nginx-compose
+    ports:
+      - "80:80"
